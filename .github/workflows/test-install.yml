@@ -12,5 +12,6 @@ jobs:
       - run: |
           Install-Module Microsoft.Xrm.Data.PowerShell -Force
           Import-Module Microsoft.Xrm.Data.PowerShell -Force
+          Update-Help
           Get-Help Export-CrmDataFile
         shell: powershell

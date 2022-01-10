@@ -1,9 +1,11 @@
-on: push
+on:
+  push: 
+    paths:
+      - 'install/**'
+      - '.github/workflows/test-install.yml' # trigger workflow that tests the install action
 jobs: 
   install:
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v2 # prevents breaking change
       - uses: ./install # name of another repo
-        with:
-          who-to-greet: world

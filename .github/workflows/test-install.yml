@@ -1,0 +1,8 @@
+on: push
+jobs: 
+  install:
+    runs-on: windows-latest
+    steps:
+      - uses: ./install # name of another repo
+        with:
+          who-to-greet: world

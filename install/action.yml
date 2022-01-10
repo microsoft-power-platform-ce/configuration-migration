@@ -8,7 +8,8 @@ runs:
         }
         else {
           Write-Host "Microsoft.Xrm.Data.PowerShell module does not exist installing now."
-          Install-Module Microsoft.Xrm.Data.PowerShell `
+          Install-Module `
+            -Name Microsoft.Xrm.Tooling.ConfigurationMigration `
             -RequiredVersion 1.0.0.61 `
             -Force
         }

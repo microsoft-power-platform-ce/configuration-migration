@@ -1,0 +1,46 @@
+name: export-configuration-data
+inputs: 
+  environment-url:
+    description: 'URL of Power Platform environment to connect with; e.g. "https://test-env.crm.dynamics.com"'
+    required: true
+
+  user-name:
+    description: 'Power Platform user name to authenticate with, e.g. myname@my-org.onmicrosoft.com. Setting this input makes user-name and password required; specifying alternate "app-id" credential set of inputs will result in an error.'
+    required: false
+
+  password-secret:
+    description: "Power Platform password, required if authenticating with username. Do NOT checkin password, instead create a secret and reference it here with: see: https://help.github.com/en/actions/configuring-and-managing-workflows/creating-and-storing-encrypted-secrets#using-encrypted-secrets-in-a-workflow"
+    required: false
+
+  app-id:
+    description: 'The application id to authenticate with. Setting this input makes app-id, tenant-id and client-secret required; specifying alternate "username" credential set of inputs will result in an error.'
+    required: false
+
+  client-secret:
+    description: 'The client secret to authenticate with. Required if authenticating with app-id.'
+    required: false
+
+  tenant-id:
+    description: 'Tenant id if using app-id & client secret to authenticate.'
+    required: false
+
+  schema-file:
+    description: 'Path to the schema XML file'
+    required: true
+
+  data-file:
+    description: 'Path to save the exported data .zip archive'
+    required: true
+
+runs:
+  using: "composite"
+  steps:
+    - uses: ./install
+    - run: | 
+        $connection = Get-CrmConnection `
+          -ConnectionString "AuthType=ClientSecret; URL=${{ inputs.environment-url}}; ClientID=${{ inputs.app-id}}; ClientSecret=${{ inputs.client-secret}}"
+        export-CrmDataFile `
+          -CrmConnection $connection `
+          -SchemaFile ${{inputs.schema-file}} `
+          -DataFile ${{inputs.data-file}}       
+      shell: PowerShell

@@ -2,6 +2,7 @@ on:
   push: 
     paths:
       - 'export/**'
+      - 'install/**'
       - '.github/workflows/test-export.yml' # trigger workflow that tests the install action
 jobs: 
   export:

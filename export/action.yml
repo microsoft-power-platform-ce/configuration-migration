@@ -39,7 +39,7 @@ runs:
     - run: | 
         $connection = Get-CrmConnection `
           -ConnectionString "AuthType=ClientSecret; URL=${{ inputs.environment-url}}; ClientID=${{ inputs.app-id}}; ClientSecret=${{ inputs.client-secret}}"
-        export-CrmDataFile `
+        Export-CrmDataFile `
           -CrmConnection $connection `
           -SchemaFile ${{inputs.schema-file}} `
           -DataFile ${{inputs.data-file}}       

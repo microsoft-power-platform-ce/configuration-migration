@@ -10,5 +10,6 @@ jobs:
       - uses: actions/checkout@v2 # prevents breaking change
       - uses: ./install # name of another repo
       - run: |
+          Get-Help Get-CrmConnection
           Get-Help Export-CrmDataFile
         shell: powershell

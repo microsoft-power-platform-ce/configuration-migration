@@ -5,11 +5,11 @@ runs:
     - run: | 
         if (Get-Module -ListAvailable -Name Microsoft.Xrm.Data.PowerShell) {
           Write-Host "Microsoft.Xrm.Data.PowerShell module exists skipping install."
-          Import-Module Microsoft.Xrm.Data.PowerShell -Force
         }
         else {
           Write-Host "Microsoft.Xrm.Data.PowerShell module does not exist installing now."
-          Install-Module Microsoft.Xrm.Data.PowerShell -Force
-          Import-Module Microsoft.Xrm.Data.PowerShell -Force
+          Install-Module Microsoft.Xrm.Data.PowerShell `
+            -RequiredVersion 1.0.0.61 `
+            -Force
         }
       shell: PowerShell

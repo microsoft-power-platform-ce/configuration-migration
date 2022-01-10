@@ -1,6 +1,4 @@
 name: 'install config tool'
-inputs:
-  # to-do: add version number of config migration tool
 runs:
   using: "composite"
   steps:

@@ -8,8 +8,9 @@ jobs:
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v2 # prevents breaking change
-      - uses: ./install # name of another repo
+      # - uses: ./install # name of another repo
       - run: |
+          Install-Module Microsoft.Xrm.Data.PowerShell -Force
           Import-Module Microsoft.Xrm.Data.PowerShell -Force
           Get-Help Export-CrmDataFile
         shell: powershell

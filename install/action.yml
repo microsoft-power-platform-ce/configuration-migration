@@ -1,8 +1,8 @@
-name: 'install config tool'
+name: "install config tool"
 runs:
   using: "composite"
   steps:
-    - run: | 
+    - run: |
         if (Get-Module -ListAvailable -Name Microsoft.Xrm.Data.PowerShell) {
           Write-Host "Microsoft.Xrm.Data.PowerShell module exists skipping install."
         }

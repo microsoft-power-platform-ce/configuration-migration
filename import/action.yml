@@ -1,4 +1,4 @@
-name: export-configuration-data
+name: import-configuration-data
 inputs: 
   environment-url:
     description: 'URL of Power Platform environment to connect with; e.g. "https://test-env.crm.dynamics.com"'

@@ -19,7 +19,7 @@ jobs:
       - run: |
           Expand-Archive `
             -Path data.zip `
-            -DestinationPath sample-data ` 
+            -DestinationPath sample-data `
             -Force
         id: expand
       - uses: EndBug/add-and-commit@v7

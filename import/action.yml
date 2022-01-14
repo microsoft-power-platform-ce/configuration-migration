@@ -12,10 +12,6 @@ inputs:
     description: 'The client secret to authenticate with. Required if authenticating with app-id.'
     required: true
 
-  schema-file:
-    description: 'Path to the schema XML file'
-    required: true
-
   data-file:
     description: 'Path to save the exported data .zip archive'
     required: true
@@ -27,8 +23,7 @@ runs:
     - run: | 
         $connection = Get-CrmConnection `
           -ConnectionString "AuthType=ClientSecret; URL=${{ inputs.environment-url}}; ClientID=${{ inputs.app-id}}; ClientSecret=${{ inputs.client-secret}}"
-        Export-CrmDataFile `
+        Import-CrmDataFile `
           -CrmConnection $connection `
-          -SchemaFile ${{inputs.schema-file}} `
           -DataFile ${{inputs.data-file}}       
       shell: PowerShell

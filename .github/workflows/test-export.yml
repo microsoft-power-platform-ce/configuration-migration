@@ -4,6 +4,7 @@ on:
       - "export/**"
       - "install/**"
       - ".github/workflows/test-export.yml" # trigger workflow that tests the install action
+  workflow_dispatch:
 jobs:
   export:
     runs-on: windows-latest

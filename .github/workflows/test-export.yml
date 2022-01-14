@@ -1,19 +1,25 @@
 on:
-  push: 
+  push:
     paths:
-      - 'export/**'
-      - 'install/**'
-      - '.github/workflows/test-export.yml' # trigger workflow that tests the install action
-jobs: 
+      - "export/**"
+      - "install/**"
+      - ".github/workflows/test-export.yml" # trigger workflow that tests the install action
+jobs:
   export:
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v2 # prevents breaking change
-      - uses: ./export  # name of another repo
-        with: 
+      - uses: ./export # name of another repo
+        with:
           environment-url: ${{secrets.DEV_URL}}
           app-id: ${{secrets.CLIENT_ID}}
           client-secret: ${{secrets.CLIENT_SECRET}}
           schema-file: sample-schema.xml
           data-file: data.zip
-          
+      - run: |
+          Expand-Archive `
+            -Path data.zip `
+            -DestinationPath sample-data ` 
+            -Force
+        id: expand
+      - uses: EndBug/add-and-commit@v7

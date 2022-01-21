@@ -1,0 +1,25 @@
+on:
+  push:
+    paths:
+      - "import/**"
+      - "install/**"
+      - ".github/workflows/test-import.yml" # trigger workflow that tests the install action
+  workflow_dispatch:
+jobs:
+  import:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v2 # prevents breaking change
+      - run: |
+          Compress-Archive `
+            -Path sample-data `
+            -DestinationPath data.zip `
+            -Force
+        id: compress
+      - uses: ./import # name of another repo
+        with:
+          environment-url: ${{secrets.PROD_URL}}
+          app-id: ${{secrets.CLIENT_ID}}
+          client-secret: ${{secrets.CLIENT_SECRET}}
+          schema-file: sample-schema.xml
+          data-file: data.zip
